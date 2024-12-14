@@ -92,12 +92,20 @@ function App() {
                         showInfo === char && (
                           <div id="stats" className={char.element} key={i}>
                             <div>Stats</div>
-                            <div>HP: {backendData.stats[i].maxHp.value}</div>
-                            <div>ATK: {backendData.stats[i].atk.value}</div>
-                            <div>DEF: {backendData.stats[i].def.value}</div>
+                            <div>
+                              HP: {Math.round(backendData.stats[i].maxHp.value)}
+                            </div>
+                            <div>
+                              ATK: {Math.round(backendData.stats[i].atk.value)}
+                            </div>
+                            <div>
+                              DEF: {Math.round(backendData.stats[i].def.value)}
+                            </div>
                             <div>
                               Elemental Mastery:{" "}
-                              {backendData.stats[i].elementalMastery.value}
+                              {Math.round(
+                                backendData.stats[i].elementalMastery.value
+                              )}
                             </div>
                             <div>
                               Crit Rate:{" "}
