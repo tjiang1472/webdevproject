@@ -1,13 +1,248 @@
+@font-face {
+  font-family: ShinShin;
+  src: url(ShinShin.ec4e6ba6.woff2);
+}
 body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  max-width: 100vw;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: "ShinShin";
+  color: white;
+  background-image: url("https://wallpapercave.com/wp/wp7648520.jpg");
+  text-align: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+#playerInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 25px;
+  padding: 25px;
+  width: 400px;
+  text-align: initial;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 20px;
+  position: absolute;
+  top: 0;
+}
+
+#card {
+  width: 100vw;
+  height: 50vh;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 20px;
+  align-items: center;
+  margin: auto;
+  position: relative;
+}
+
+#ccontainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  justify-self: end;
+  background: linear-gradient(
+    to left,
+    rgb(255, 255, 255, 0.045),
+    rgb(255, 255, 255, 0) 250px
+  );
+}
+
+#characters {
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+  margin-right: 25px;
+  justify-content: flex-start;
+  height: 100px;
+}
+
+#characters > * {
+  height: 100%;
+}
+
+#characterDetails {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-around;
+  width: 500px;
+  /* background-color: rgb(255, 255, 255, 0.5); */
+  border-radius: 30px;
+  align-items: center;
+}
+
+.weaponimg {
+  width: 75px;
+  height: 75px;
+}
+
+#charName > img {
+  width: 128px;
+  height: 128px;
+  cursor: pointer;
+  top: -20px;
+  position: relative;
+  clip-path: polygon(100% 20%, 100% 100%, 0% 100%, 0% 20%);
+}
+
+#pfp {
+  border-radius: 50%;
+  background-color: white;
+  overflow: hidden;
+  height: 100px;
+  width: 100px;
+  outline: solid rgb(226, 226, 226);
+  margin: 0px 0px 25px 0px;
+}
+
+#pfp > img {
+  width: 100px;
+  height: 100px;
+}
+
+#charName {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+  background: linear-gradient(
+    to left,
+    rgb(255, 255, 255, 0.1),
+    rgb(255, 255, 255, 0)
+  );
+  border-radius: 50px;
+  width: 250px;
+  height: 60px;
+  align-items: center;
+}
+
+#left {
+  width: 50vw;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+#right {
+  width: 50vw;
+  height: 40vh;
+  display: flex;
+  justify-content: flex-end;
+}
+
+#characterDetailsright {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+#characterDetailsleft {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+}
+
+.Hydro {
+  /* background-color: rgb(77, 139, 255, 0.4); */
+  background: linear-gradient(
+    to right,
+    rgb(77, 139, 255, 0.5),
+    rgb(0, 238, 170, 0)
+  );
+}
+
+.Pyro {
+  /* background-color: rgb(243, 59, 4, 0.4); */
+  background: linear-gradient(
+    to right,
+    rgb(243, 59, 4, 0.5),
+    rgb(0, 238, 170, 0)
+  );
+}
+
+.Dendro {
+  /* background-color: rgb(22, 197, 37, 0.4); */
+  background: linear-gradient(
+    to right,
+    rgb(22, 197, 37, 0.5),
+    rgb(0, 238, 170, 0)
+  );
+}
+
+.Cryo {
+  /* background-color: rgb(33, 253, 253, 0.4); */
+  background: linear-gradient(
+    to right,
+    rgb(33, 253, 253, 0.5),
+    rgb(0, 238, 170, 0)
+  );
+}
+
+.Electro {
+  /* background-color: rgb(153, 26, 226, 0.4); */
+  background: linear-gradient(
+    to right,
+    rgb(153, 26, 226, 0.5),
+    rgb(0, 238, 170, 0)
+  );
+}
+
+.Anemo {
+  background: linear-gradient(
+    to right,
+    rgb(10, 238, 170, 0.5),
+    rgb(0, 238, 170, 0)
+  );
+}
+
+.Geo {
+  /* background-color: rgb(226, 166, 54, 0.4); */
+  background: linear-gradient(
+    to right,
+    rgb(226, 166, 54, 0.5),
+    rgb(0, 238, 170, 0)
+  );
+}
+
+#iden {
+  display: flex;
+  flex-direction: row;
+}
+
+#nameUID {
+  margin: 0px 25px;
+  display: flex;
+  flex-direction: column;
+}
+
+#reset {
+  cursor: pointer;
+  width: 100px;
+  height: 5px;
+  margin: 5px;
+}
+
+#submit {
+  border-radius: 10px;
+}
+
+#stats {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
+  margin: 25px;
+  padding: 25px;
+  width: 400px;
+  text-align: initial;
+  border-radius: 20px;
+  position: absolute;
+  bottom: 0;
+  height: 250px;
 }
