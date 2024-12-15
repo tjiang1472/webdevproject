@@ -1,14 +1,65 @@
 import express, { response } from "express";
 import fetch from "node-fetch";
-const app = express();
 import { Wrapper, AssetFinder } from "enkanetwork.js";
 const { genshin, starrail } = new Wrapper({ cache: true });
 const { genshin: genshinAsset, starrail: starrailAsset } = new AssetFinder({
   language: "en",
 });
+import { MongoClient, ServerApiVersion } from "mongodb";
+
+const app = express();
 app.use(express.json());
 
-let profiles = [];
+const db = "profiles";
+const collection = "genshin_profiles";
+
+const uri =
+  "mongodb+srv://tjiang1472:Wnkzqp5FjvfflYFX@cluster0.49xpz.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+const client = new MongoClient(uri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  serverApi: ServerApiVersion.v1,
+});
+await client.connect();
+
+app.get("/connection", async (req, res) => {
+  const ping = await client.db("admin").command({ ping: 1 });
+  const dbs = await client.db().admin().listDatabases();
+  res.end(
+    JSON.stringify({
+      ping,
+      dbs,
+    })
+  );
+});
+
+app.get("/findProfile/:uid", async (req, res) => {
+  const { uid } = req.params;
+
+  const result = await client
+    .db(db)
+    .collection(collection)
+    .findOne({ uid: uid });
+  if (!result) {
+    res.send({ message: "No profiles found." });
+  } else {
+    res.send(result);
+  }
+});
+
+app.delete("/deleteProfile/:uid", async (req, res) => {
+  const { uid } = req.params;
+
+  const result = await client
+    .db(db)
+    .collection(collection)
+    .deleteOne({ uid: uid });
+  if (!result) {
+    res.send({ message: "No profiles found." });
+  } else {
+    res.send({ message: `${uid} deleted.` });
+  }
+});
 
 app.get("/api", async (req, res) => {
   try {
@@ -31,7 +82,7 @@ app.post("/submit", async (req, res) => {
   let namecard;
   genshin
     .getPlayer(uid)
-    .then((player) => {
+    .then(async (player) => {
       console.log(player);
       const { player: playerInfo, characters, uid } = player;
       for (let character of characters) {
@@ -63,14 +114,34 @@ app.post("/submit", async (req, res) => {
         playerInfo.profilePicture.assets.icon
       );
 
-      res.send({
+      const sendData = {
         playerInfo,
         uid,
         namecard,
         characterData,
         profileUrl,
         stats,
-      });
+      };
+
+      const exist = await client
+        .db(db)
+        .collection(collection)
+        .findOne({ uid: uid });
+      if (!exist) {
+        const result = await client.db(db).collection(collection).insertOne({
+          playerInfo,
+          uid,
+          namecard,
+          characterData,
+          profileUrl,
+          stats,
+        });
+        console.log("data does not exist");
+      } else {
+        console.log("exist");
+      }
+
+      res.send(sendData);
     })
     .catch((error) => {
       console.error("Error: ", error);

@@ -40,18 +40,42 @@ function App() {
   const submitInfo = async () => {
     const inputData = input;
 
-    const result = await fetch("/submit", {
-      method: "POST",
+    const existResult = await fetch(`/findProfile/${inputData}`);
+    const test = await existResult.json();
+    if (test.message === "No profiles found.") {
+      const result = await fetch("/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ uid: inputData }),
+      });
+
+      const resultinJson = await result.json();
+      console.log(resultinJson);
+      console.log("post");
+      setBackendData(resultinJson);
+    } else {
+      console.log(test);
+      console.log("get");
+      setBackendData(test);
+    }
+
+    setInput("");
+  };
+
+  const deleteInfo = async () => {
+    const inputData = input;
+
+    const result = await fetch(`/deleteProfile/${inputData}`, {
+      method: "DELETE",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ uid: inputData }),
     });
-
-    const resultinJson = await result.json();
-    console.log(resultinJson);
-    setBackendData(resultinJson);
-    setInput("");
+    const message = await result.json();
+    console.log(message);
   };
 
   return (
@@ -91,7 +115,6 @@ function App() {
                       (char, i) =>
                         showInfo === char && (
                           <div id="stats" className={char.element} key={i}>
-                            <div>Stats</div>
                             <div>
                               HP: {Math.round(backendData.stats[i].maxHp.value)}
                             </div>
@@ -283,6 +306,7 @@ function App() {
               Submit
             </button>
           )}
+          <button onClick={deleteInfo}>Delete</button>
         </div>
       )}
       {!root && <p>Loading</p>}

@@ -15,6 +15,7 @@ body {
   text-align: center;
   background-repeat: no-repeat;
   background-size: cover;
+  font-size: 18px;
 }
 
 #playerInfo {
@@ -245,4 +246,6 @@ body {
   position: absolute;
   bottom: 0;
   height: 250px;
+  overflow: auto;
+  scrollbar-width: none;
 }
