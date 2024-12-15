@@ -66,6 +66,7 @@ function App() {
 
   const deleteInfo = async () => {
     const inputData = input;
+    console.log("delete");
 
     const result = await fetch(`/deleteProfile/${inputData}`, {
       method: "DELETE",
@@ -74,8 +75,26 @@ function App() {
       },
       body: JSON.stringify({ uid: inputData }),
     });
-    const message = await result.json();
+    const { message } = await result.json();
     console.log(message);
+    setInput("");
+  };
+
+  const updateCharacters = async () => {
+    const [uid, name] = input.split(",");
+    const inputData = { uid, name };
+    console.log("update");
+
+    const result = await fetch(`/updateProfile/${uid}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ name }),
+    });
+    const { message } = await result.json();
+    console.log(message);
+    setInput("");
   };
 
   return (
@@ -302,11 +321,13 @@ function App() {
           )}
           <br />
           {!backendData && (
-            <button id="submit" onClick={submitInfo}>
+            <button onClick={submitInfo}> 
+            {/* id="submit" */}
               Submit
             </button>
           )}
-          <button onClick={deleteInfo}>Delete</button>
+          {!backendData && <button onClick={deleteInfo}>Delete</button>}
+          {!backendData && <button onClick={updateCharacters}>Update</button>}
         </div>
       )}
       {!root && <p>Loading</p>}

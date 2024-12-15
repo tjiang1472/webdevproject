@@ -73,7 +73,6 @@ body {
   flex-direction: row-reverse;
   justify-content: space-around;
   width: 500px;
-  /* background-color: rgb(255, 255, 255, 0.5); */
   border-radius: 30px;
   align-items: center;
 }
@@ -113,7 +112,7 @@ body {
   justify-content: flex-start;
   background: linear-gradient(
     to left,
-    rgb(255, 255, 255, 0.1),
+    rgb(255, 255, 255, 0.4),
     rgb(255, 255, 255, 0)
   );
   border-radius: 50px;
@@ -248,4 +247,5 @@ body {
   height: 250px;
   overflow: auto;
   scrollbar-width: none;
+  gap: 8px;
 }

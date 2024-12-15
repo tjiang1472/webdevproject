@@ -36,28 +36,65 @@ app.get("/connection", async (req, res) => {
 app.get("/findProfile/:uid", async (req, res) => {
   const { uid } = req.params;
 
-  const result = await client
-    .db(db)
-    .collection(collection)
-    .findOne({ uid: uid });
-  if (!result) {
-    res.send({ message: "No profiles found." });
-  } else {
-    res.send(result);
+  try {
+    const result = await client
+      .db(db)
+      .collection(collection)
+      .findOne({ uid: uid });
+    if (!result) {
+      res.send({ message: "No profiles found." });
+    } else {
+      res.send(result);
+    }
+  } catch (error) {
+    console.log("Error: ", error);
+  }
+});
+
+app.put("/updateProfile/:uid", async (req, res) => {
+  const { uid } = req.params;
+  const { name } = req.body;
+
+  try {
+    const result = await client
+      .db(db)
+      .collection(collection)
+      .findOne({ uid: uid });
+    if (!result) {
+      console.log(result);
+      res.send({ message: "No profiles found." });
+    } else {
+      const test = await client
+        .db(db)
+        .collection(collection)
+        .updateOne({ uid: uid }, { $set: { "playerInfo.username": name } });
+      res.send({ message: `${uid} updated.` });
+    }
+  } catch (error) {
+    console.log("Error: ", error);
   }
 });
 
 app.delete("/deleteProfile/:uid", async (req, res) => {
   const { uid } = req.params;
 
-  const result = await client
-    .db(db)
-    .collection(collection)
-    .deleteOne({ uid: uid });
-  if (!result) {
-    res.send({ message: "No profiles found." });
-  } else {
-    res.send({ message: `${uid} deleted.` });
+  try {
+    const result = await client
+      .db(db)
+      .collection(collection)
+      .findOne({ uid: uid });
+    if (!result) {
+      console.log(result);
+      res.send({ message: "No profiles found." });
+    } else {
+      const tobedelete = await client
+        .db(db)
+        .collection(collection)
+        .deleteOne({ uid: uid });
+      res.send({ message: `${uid} deleted.` });
+    }
+  } catch (error) {
+    console.log("Error: ", error);
   }
 });
 
