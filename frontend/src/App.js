@@ -82,7 +82,6 @@ function App() {
 
   const updateCharacters = async () => {
     const [uid, name] = input.split(",");
-    const inputData = { uid, name };
     console.log("update");
 
     const result = await fetch(`/updateProfile/${uid}`, {
@@ -97,8 +96,46 @@ function App() {
     setInput("");
   };
 
+  const [bg, setBg] = useState();
+
+  useEffect(() => {
+    const background = () => {
+      const int = Math.floor(Math.random() * 6);
+      if (int === 0) {
+        return "20241215174125.png";
+      }
+      if (int === 1) {
+        return "20241215174224.png";
+      }
+      if (int === 2) {
+        return "20241215174354.png";
+      }
+      if (int === 3) {
+        return "20241215175004.png";
+      }
+      if (int === 4) {
+        return "20241215175235.png";
+      }
+      if (int === 5) {
+        return "20241215175404.png";
+      }
+      if (int === 6) {
+        return "20241215175521.png";
+      }
+    };
+    setBg(background());
+  }, []);
+
   return (
-    <div>
+    <div
+      id="bg"
+      style={{
+        backgroundImage: `url(${bg})`,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        backgroundPosition: "center 70%",
+      }}
+    >
       {root && (
         <div>
           {backendData && (
@@ -321,8 +358,8 @@ function App() {
           )}
           <br />
           {!backendData && (
-            <button onClick={submitInfo}> 
-            {/* id="submit" */}
+            <button onClick={submitInfo}>
+              {/* id="submit" */}
               Submit
             </button>
           )}

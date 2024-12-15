@@ -11,7 +11,19 @@ body {
   margin: 0;
   font-family: "ShinShin";
   color: white;
-  background-image: url("https://wallpapercave.com/wp/wp7648520.jpg");
+  /* background-image: url("https://wallpapercave.com/wp/wp7648520.jpg"); */
+  text-align: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-size: 18px;
+}
+
+#bg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
   text-align: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -152,7 +164,7 @@ body {
   /* background-color: rgb(77, 139, 255, 0.4); */
   background: linear-gradient(
     to right,
-    rgb(77, 139, 255, 0.5),
+    rgba(70, 113, 255, 0.5),
     rgb(0, 238, 170, 0)
   );
 }
@@ -179,7 +191,7 @@ body {
   /* background-color: rgb(33, 253, 253, 0.4); */
   background: linear-gradient(
     to right,
-    rgb(33, 253, 253, 0.5),
+    rgba(2, 181, 212, 0.5),
     rgb(0, 238, 170, 0)
   );
 }
