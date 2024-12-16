@@ -349,6 +349,7 @@ function App() {
           {!backendData && <p>Enter Player UID</p>}
           {!backendData && (
             <input
+              class="pure-input-rounded"
               placeholder="Input UID"
               type="text"
               id="input"
@@ -357,14 +358,9 @@ function App() {
             ></input>
           )}
           <br />
-          {!backendData && (
-            <button onClick={submitInfo}>
-              {/* id="submit" */}
-              Submit
-            </button>
-          )}
-          {!backendData && <button onClick={deleteInfo}>Delete</button>}
+          {!backendData && <button onClick={submitInfo}>Submit</button>}
           {!backendData && <button onClick={updateCharacters}>Update</button>}
+          {!backendData && <button onClick={deleteInfo}>Delete</button>}
         </div>
       )}
       {!root && <p>Loading</p>}
