@@ -48,6 +48,7 @@ app.get("/findProfile/:uid", async (req, res) => {
     }
   } catch (error) {
     console.log("Error: ", error);
+    res.status(500);
   }
 });
 
@@ -72,6 +73,7 @@ app.put("/updateProfile/:uid", async (req, res) => {
     }
   } catch (error) {
     console.log("Error: ", error);
+    res.status(500);
   }
 });
 
@@ -95,6 +97,7 @@ app.delete("/deleteProfile/:uid", async (req, res) => {
     }
   } catch (error) {
     console.log("Error: ", error);
+    res.status(500);
   }
 });
 
@@ -108,6 +111,7 @@ app.get("/api", async (req, res) => {
     }
   } catch (error) {
     console.error(error.message);
+    res.status(500);
   }
 });
 
